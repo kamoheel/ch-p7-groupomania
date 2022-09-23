@@ -1,0 +1,9 @@
+.active-btn {
+    color: #fff; 
+    border-radius: 30px; 
+    background-color: #FD2D01;
+}
+
+.error {
+    color: #FD2D01
+}
