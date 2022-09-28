@@ -8,7 +8,7 @@ export const PostDescription = styled.span`
 `
 
 export const PostTitle = styled.div`
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+  color: #000000;
   font-size: 22px;
   font-weight: normal;
   align-self: center;
@@ -28,8 +28,7 @@ export const PostWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 30px;
-    background-color: ${({ theme }) =>
-    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    background-color: ${colors.backgroundLight};
     border-radius: 30px;
     width: 350px;
     transition: 200ms;

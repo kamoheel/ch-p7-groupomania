@@ -2,7 +2,7 @@
 import Post from '../../components/Post'
 import styled from 'styled-components'
 import { Loader } from '../../utils/style/Atoms'
-import { useFetch, useTheme } from '../../utils/hooks'
+import { useFetch } from '../../utils/hooks'
 import colors from '../../utils/style/colors'
 import { Link } from 'react-router-dom'
 
@@ -30,7 +30,7 @@ const PageTitle = styled.h1`
   font-size: 30px;
   text-align: center;
   padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+  color: #000000;
 `
 
 const PageSubtitle = styled.h2`
@@ -39,11 +39,10 @@ const PageSubtitle = styled.h2`
   font-weight: 300;
   text-align: center;
   padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+  color: #000000;
 `
 
 function Posts() {
-    const { theme } = useTheme()
     const { data, isLoading, error } = useFetch(`http://localhost:5000/api/posts`)
 
     const { postsList } = data
@@ -54,12 +53,12 @@ function Posts() {
 
     return (
         <PostsContainer>
-            <PageTitle theme={theme}>Les posts</PageTitle>
-            <PageSubtitle theme={theme}>Retrouvez ce que vos collègues ont posté</PageSubtitle>
+            <PageTitle>Les posts</PageTitle>
+            <PageSubtitle>Retrouvez ce que vos collègues ont posté</PageSubtitle>
             
                 {isLoading ? (
                     <LoaderWrapper>
-                        <Loader theme={theme} data-testid="loader" />
+                        <Loader data-testid="loader" />
                     </LoaderWrapper>
                 ) : (
                     <PostContainer>
@@ -69,7 +68,6 @@ function Posts() {
                                 label={post.description}
                                 picture={post.picture}
                                 title={post.title}
-                                theme={theme}
                             />
                         </Link>
                     ))}

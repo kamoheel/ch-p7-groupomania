@@ -31,7 +31,7 @@ function Header() {
             <StyledImage src={Logo} alt='Logo Shiny' />
             <nav>
                 <StyledLink to="/" $isFullLink>Accueil</StyledLink>
-                <StyledLink to="/profile">Profil</StyledLink>
+                <StyledLink to="/login">Connexion</StyledLink>
                 <StyledLink to="/posts">Fil d'actualité</StyledLink>
                 
             </nav>

@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+ 
+$color-primary: #FD2D01;
+$color-secondary: #FFD7D7;
+$color-tertiary: #4E5166;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', Helvetica, sans-serif;
+  }
+body {
+  scroll-behavior: smooth;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+li {
+  list-style-type: none;
+}
+a {
+  color: $color-primary;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:visited {
+  text-decoration: none;
+}
+.faIcon{
+  padding-right: 1rem;
+}
+

@@ -10,7 +10,7 @@ const PageTitle = styled.h1`
   font-size: 30px;
   text-align: center;
   padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+  color: #000000;
 `
 
 const PageSubtitle = styled.h2`
@@ -19,7 +19,7 @@ const PageSubtitle = styled.h2`
   font-weight: 300;
   text-align: center;
   padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+  color: #000000;
 `
 
 const StyledLink = styled(Link)`

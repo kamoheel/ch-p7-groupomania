@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-var session = require('express-session');
-
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -10,6 +8,7 @@ exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
         const user = new User({
+            pseudo: req.body.pseudo,
             email: req.body.email,
             password: hash
         });
@@ -30,17 +29,18 @@ exports.login = (req, res, next) => {
                 .then(valid => {
                     if (!valid) {
                         return res.status(401).json({ message: 'Identifiants incorrects' });
-                    }
+                    } else {
                     const createdToken = jwt.sign(
                         { userId: user._id },
                         'RANDOM_TOKEN_SECRET',
                         { expiresIn: '24h' }
                     )
-                    res.cookie('jwt', createdToken, { httpOnly: true, maxAge});
+                    res.cookie("jwt", createdToken);
                     res.status(200).json({
                         userId: user._id,
                         token: createdToken
                     });
+                    }
                 })
         
                 .catch(error => res.status(500).json({ error }));
@@ -48,7 +48,8 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-exports.logout = (req, res, next) => {
-    res.cookie('jwt', '', { maxAge: 1 });
+exports.logout = (req, res) => {
+    res.clearCookie("jwt");
+    res.status(200).json("OUT");
     res.redirect('/');
 }

@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyledDiv, PageTitle, PageSubtitle, StyledForm, StyledLabel, StyledButton} from './style';
 
-
-function SignupComponent() {
+function LoginComponent() {
    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignup = (e) => {
+
+    const handleLogin = (e) => {
         e.preventDefault();
+
         const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
-
+        
         axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
-            
+            url: `${process.env.REACT_APP_API_URL}api/auth/login`,
+            withCredentials: true,
             data: {
                 email,
                 password,
@@ -27,6 +27,7 @@ function SignupComponent() {
                     emailError.innerHTML = res.data.errors.email;
                     passwordError.innerHTML = res.data.errors.password;
                 } else {
+                    localStorage.setItem("user_info", JSON.stringify(res.data));
                     window.location = '/';
                 }
             })
@@ -36,38 +37,42 @@ function SignupComponent() {
     };
 
     return (
-        <StyledDiv>
-            <PageTitle>S'inscrire</PageTitle>
-            <PageSubtitle>Inscrivez-vous pour voir ce que vos collègues ont posté</PageSubtitle>
-            <StyledForm onSubmit={handleSignup}>
-                    <StyledLabel htmlFor='email'> E-mail : <br />
+        <div className="form-container">
+            <h2 className='form-container--title'>Connexion</h2>
+            <h3 className='form-container--subtitle'>Connectez vous pour voir ce que vos collègues ont posté</h3>
+            <form className='form' onSubmit={handleLogin}>
+                    <label className='form--label' htmlFor='email'> E-mail : <br />
                         <input 
+                            className='form--input'
                             type="email" 
                             id="email" 
                             label="email" 
-                            onChange={(e)=>setEmail(e.target.value)} 
+                            placeholder="exemple@groupomania.fr"
+                            onChange={(e) => setEmail(e.target.value)}
                             value={email} 
                         /> 
                         <br />
-                    </StyledLabel>
+                    </label>
                     <div className='email error'></div>
                     <br />
-                    <StyledLabel htmlFor='password'> Mot de Passe : <br />
+                    <label className='form--label' htmlFor='password'> Mot de Passe : <br />
                         <input 
+                            className='form--input'
                             type="password" 
                             id="password" 
                             label="mot de passe" 
+                            placeholder="Votre mot de passe"
                             onChange={(e)=>setPassword(e.target.value)}  
                             value={password}
                         /> 
                         <br />
-                    </StyledLabel>
+                    </label>
                     <div className='password error'></div>
                     <br />
-                    <StyledButton type="submit">S'inscrire'</StyledButton>
-            </StyledForm>
-        </StyledDiv>
+                    <button className='form--btn' type="submit">Se connecter</button>
+            </form>
+        </div>
     )
 }
 
-export default SignupComponent
+export default LoginComponent

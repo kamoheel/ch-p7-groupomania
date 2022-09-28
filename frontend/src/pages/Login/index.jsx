@@ -1,47 +1,35 @@
 //import DefaultPicture from '../../assets/profile.png'
-import LoginComponent from '../../components/LoginComponent'
-import styled from 'styled-components'
-import { useTheme } from '../../utils/hooks'
-import colors from '../../utils/style/colors'
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import SignupComponent from '../../components/Log/signup'
+import LoginComponent from '../../components/Log/login'
 
+const Login = () => {
+    const [signupModal, setSignupModal] = useState(true);
+    const [loginModal, setLoginModal] = useState(false);
 
-const PageTitle = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
-`
-
-const PageSubtitle = styled.h2`
-  font-size: 20px;
-  color: ${colors.secondary};
-  font-weight: 300;
-  text-align: center;
-  padding-bottom: 30px;
-  color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
-`
-
-const StyledLink = styled(Link)`
-    padding: 15px;
-    color: #8186a0;
-    text-decoration: none;
-    font-size: 18px;
-    ${(props) =>
-    props.$isFullLink && `color: white; border-radius: 30px; background-color: ${colors.primary};`}
-`
-
-function Login() {
-    const { theme } = useTheme()
+    const handleModals = (e) => {
+        if (e.target.id === "register") {
+            setLoginModal(false);
+            setSignupModal(true);
+        } else if (e.target.id === "login") {
+            setSignupModal(false);
+            setLoginModal(true);
+        }
+    }
 
     return (
-        <div>
-            <PageTitle theme={theme}>Connexion</PageTitle>
-            <PageSubtitle theme={theme}>Connectez vous pour voir ce que vos collègues ont posté</PageSubtitle>
-            <LoginComponent />
-            <p>Nouvel utilisateur ? Cliquez ci-dessous pour créer un compte </p>
-            <StyledLink to="/signup" $isFullLink>Créer un compte</StyledLink>
+        <div className='container'>
 
+                <div className='container--toggle'>
+                <ul>
+                    <li id="register" onClick={handleModals} className={signupModal ? 'active-btn' : null}>S'inscrire</li>
+                    <li id="login" onClick={handleModals} className={loginModal ? 'active-btn' : null}>Se Connecter</li>
+                </ul>
+                </div> 
+                <div className='container--component'>
+                {signupModal && <SignupComponent />}
+                {loginModal && <LoginComponent />}
+                </div>
             
         </div>
     )

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = (req, res, next) => {
+module.exports.requireAuth = (req, res, next) => {
      try {
         //le token pour l'instant inclut "Bearer token", on veut récupérer après l'espace ' ', le token qui est en 2eme [1]
         const token = req.headers.authorization.split(' ')[1];

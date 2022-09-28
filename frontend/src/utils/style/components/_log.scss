@@ -1,0 +1,102 @@
+.form-container {
+display: flex;
+flex-direction: column;
+    &--title {
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 5px;
+        color: $color-tertiary;
+    }
+    &--subtitle {
+        font-size: 20px;
+        font-weight: 300;
+        text-align: center;
+        padding-bottom: 5px;
+        color: $color-tertiary;
+    }
+}
+
+.form {
+    width: 80%;
+    border-radius: 30px;
+    color: #8186a0;
+    text-decoration: none;
+    font-size: 18px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    &--label {
+        margin: 5px 0;
+        text-align: left;
+    }
+    &--input {
+        width: 80%;
+        border-radius: 5px;
+        border: $color-tertiary solid .5px;
+    }
+    &--btn {
+        padding: 15px;
+        margin: auto;
+        width: 40%;
+        color: #8186a0;
+        text-decoration: none;
+        font-size: 18px;
+        color: white; 
+        border-radius: 30px; 
+        background-color: $color-primary;
+    }
+}
+
+.error {
+    color: #FD2D01
+}
+
+.cgu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    @media screen and (max-width: 460px) {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+    }
+    #terms {
+      margin-left: 10px;
+    }
+    .cgu-box {
+      text-decoration: underline;
+      transition: color 0.1s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        color: $color-secondary;
+      }
+    }
+  }
+  .alreadyUser {
+    margin-top: 1rem;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  .password-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    ul {
+        height: 100px;
+        padding-bottom: 1rem;
+        border-radius: 12px;
+        .password-ok {
+            color: hsl(115, 61%, 41%);
+        }
+        .password-not {
+            color: red;
+        }
+        li {
+            text-align: left;
+            font-size: 1rem;
+        }
+    }
+  }
