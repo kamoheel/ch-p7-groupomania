@@ -42,7 +42,7 @@ const Header= () => {
         
         //const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
         setUserPseudo(
-          JSON.parse(localStorage.getItem("user_info")).user_pseudo
+          JSON.parse(localStorage.getItem("user_info")).userPseudo
         );
         setIsLoggedIn(true);
     

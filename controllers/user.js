@@ -37,7 +37,7 @@ exports.login = (req, res, next) => {
                     )
                     res.cookie("jwt", createdToken, { httpOnly: true, maxAge});
                     res.status(200).json({
-                        usePseudo: req.body.pseudo,
+                        userPseudo: user.pseudo,
                         userId: user._id,
                         token: createdToken
                     });

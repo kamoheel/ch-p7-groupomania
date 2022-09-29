@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 
 module.exports.requireAuth = (req, res, next) => {
      try {
+      if (req.cookies.jwt) {
         //le token pour l'instant inclut "Bearer token", on veut récupérer après l'espace ' ', le token qui est en 2eme [1]
-        const token = req.headers.authorization.split(' ')[1];
+        const token = req.cookies.jwt;
         //décoder le token
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         const userId = decodedToken.userId;
@@ -11,7 +12,11 @@ module.exports.requireAuth = (req, res, next) => {
             userId: userId
         };
         next();
+      } else {
+         res.clearCookie();
+         console.status(401).json({ message: "Unauthorized" })
+      }
      } catch(error) {
-        res.status(401).json({ error });
+        res.status(401).json({ message: "Unauthorized" });
      };
 };
