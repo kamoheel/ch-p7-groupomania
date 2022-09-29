@@ -1,0 +1,132 @@
+.logo-small{
+    object-fit: cover;
+    height: 40px;
+    max-width: 200px;
+}
+
+nav {
+    margin: auto;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    min-width: 325px;
+    padding: 0.5rem 0 0.3rem 0;
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+  
+      li {
+        width: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .active {
+          &::after {
+            transform: translate3d(0, 0, 0) !important;
+          }
+        }
+        .nav-links {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          width: 100%;
+          height: 4rem;
+          position: relative;
+          overflow: hidden;
+          font-size: 1.6em;
+          font-weight: bold;
+          align-items: center;
+          transition: background-color 0.2s ease-in-out;
+          color: $color-primary;
+          @media screen and (max-width:768px) {
+            font-size: 1.4em;
+          }
+          &::after {
+            content: "";
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.2em;
+            background-color: $color-secondary;
+            transition: opacity 300ms, transform 300ms;
+            position: absolute;
+            transform: translate3d(-102%, 0, 0);
+          }
+          &:hover::after,
+          :focus::after {
+            transform: translate3d(0, 0, 0);
+          }
+          &:hover {
+            background-color: rgb(202, 138, 134);
+          }
+        }
+      }
+      .home {
+        &::before {
+          content: "Accueil";
+          position: absolute;
+          z-index: -1;
+          bottom: -40px;
+          width: 70px;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .profil {
+        &::before {
+          content: "Profil";
+          position: absolute;
+          z-index: -1;
+          bottom: -40px;
+          width: 50px;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .signout {
+        &::before {
+          content: "Déconnexion";
+          position: absolute;
+          z-index: -1;
+          bottom: -40px;
+          width: 110px;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    }
+}

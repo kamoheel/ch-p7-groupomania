@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from '../../assets/icon-red.png'
@@ -6,15 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
-const NavBar = ({localUserId}) => {
+const NavBar = ({ localUserId, isLoggedIn }) => {
+
     const navigate = useNavigate();
 
     const backHome = () => {
         navigate("/");
     };
 
-    const handleDisconnect = () => {
+    const handleDisconnect = (isLoggedIn) => {
         axios({
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}api/auth/logout`,
@@ -29,16 +31,38 @@ const NavBar = ({localUserId}) => {
             });
         };
 
+    function GuestNavBar() {
+        return (
+            <nav>
+                <ul>
+                    <li className="home">
+                        <NavLink className="nav-links" end to="/">
+                            <FontAwesomeIcon icon={faHome} />
+                        </NavLink>
+                    </li>
+                    <li className="login">
+                        <NavLink className="nav-links" end to={`/login`}>
+                            <FontAwesomeIcon icon={faArrowRightToBracket} />
+                        </NavLink>
+                    </li>
+ 
+                </ul> 
+            </nav>
+        )
+    };
+
     return (
         <div className="container">
             <img
                 alt="logo de groupomania"
                 src={Logo}
                 onClick={backHome}
+                className="logo-small"
             />
-            <nav>
+            {isLoggedIn ? (
+                <nav>
                 <ul>
-                    <li className="Home">
+                    <li className="home">
                         <NavLink className="nav-links" end to="/">
                             <FontAwesomeIcon icon={faHome} />
                         </NavLink>
@@ -54,8 +78,10 @@ const NavBar = ({localUserId}) => {
                         </span>
                     </li>
                 </ul>
-            </nav>
-
+                </nav>
+                ) : (
+                <GuestNavBar />
+                )}
         </div>
     )
 }

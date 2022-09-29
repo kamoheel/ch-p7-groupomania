@@ -1,42 +1,64 @@
+//import DefaultPicture from '../../assets/profile.png'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import colors from '../../utils/style/colors.js'
-import Logo from '../../assets/icon-red.png'
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import NavBar from "../../components/Nav";
+import axios from "axios";
 
-const HeaderBanner = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 40px 30px;
-`
+const Header= () => {
+    const [userId, setUserId] = useState("");
+    const [userPseudo, setUserPseudo] = useState("");
+    const [allPosts, setAllPosts] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const StyledImage = styled.img`
-    object-fit: cover;
-    height: 50px;
-    max-width: 200px;
-`
+    const navigate = useNavigate();
 
-const StyledLink = styled(Link)`
-    padding: 15px;
-    color: #8186a0;
-    text-decoration: none;
-    font-size: 18px;
-    ${(props) =>
-    props.$isFullLink && `color: white; border-radius: 30px; background-color: ${colors.primary};`}
-`
- 
-function Header() {
+    // const fetchAllPosts = () => {
+    //     axios({
+    //       method: "GET",
+    //       url: `${process.env.REACT_APP_API_URL}api/posts`,
+    //       withCredentials: true,
+    //       data: {
+    //         userId
+    //       },
+    //     })
+    //       .then((res) => {
+    //         setAllPosts(res.data);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   };
+
+    useEffect(() => {
+        if (!localStorage.getItem("user_info")) {
+            
+            setIsLoggedIn(false);
+            navigate("/login");
+            return;
+        }
+        
+        const storageUserId = JSON.parse(localStorage.getItem("user_info")).userId;
+        
+        //const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
+        setUserPseudo(
+          JSON.parse(localStorage.getItem("user_info")).user_pseudo
+        );
+        setIsLoggedIn(true);
+    
+        // if (admin === 1) {
+        //   setIsAdmin(true);
+        // }
+        setUserId(storageUserId);
+        //fetchAllPosts();
+      }, [isLoggedIn, navigate]);
+
     return (
-        <HeaderBanner>
-            <StyledImage src={Logo} alt='Logo Shiny' />
-            <nav>
-                <StyledLink to="/" $isFullLink>Accueil</StyledLink>
-                <StyledLink to="/login">Connexion</StyledLink>
-                <StyledLink to="/posts">Fil d'actualité</StyledLink>
-                
-            </nav>
-        </HeaderBanner>
+        
+        <div>
+            <NavBar localUserId={userId} isLoggedIn={isLoggedIn} />
+        </div>
     )
 }
 
-export default Header
+export default Header;

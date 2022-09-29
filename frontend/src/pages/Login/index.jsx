@@ -1,11 +1,12 @@
 //import DefaultPicture from '../../assets/profile.png'
-import { useState } from 'react';
-import SignupComponent from '../../components/Log/signup'
-import LoginComponent from '../../components/Log/login'
+import { useState} from 'react';
+import SignupComponent from '../../components/Log/signup';
+import LoginComponent from '../../components/Log/login';
 
 const Login = () => {
     const [signupModal, setSignupModal] = useState(true);
     const [loginModal, setLoginModal] = useState(false);
+
 
     const handleModals = (e) => {
         if (e.target.id === "register") {

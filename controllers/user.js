@@ -24,7 +24,7 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (!user) {
                 return res.status(401).json({ message: 'Identifiants incorrects' });
-            }
+            } else {
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {
@@ -35,8 +35,9 @@ exports.login = (req, res, next) => {
                         'RANDOM_TOKEN_SECRET',
                         { expiresIn: '24h' }
                     )
-                    res.cookie("jwt", createdToken);
+                    res.cookie("jwt", createdToken, { httpOnly: true, maxAge});
                     res.status(200).json({
+                        usePseudo: req.body.pseudo,
                         userId: user._id,
                         token: createdToken
                     });
@@ -44,12 +45,13 @@ exports.login = (req, res, next) => {
                 })
         
                 .catch(error => res.status(500).json({ error }));
+            }
         })
         .catch(error => res.status(500).json({ error }));
 };
 
 exports.logout = (req, res) => {
-    res.clearCookie("jwt");
+    res.cookie('jwt', {maxAge: 1});
+   // res.clearCookie("jwt");
     res.status(200).json("OUT");
-    res.redirect('/');
 }
