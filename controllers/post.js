@@ -3,22 +3,23 @@ const Post = require('../models/post');
 const fs = require('fs');
 
 exports.createPost = (req, res, next) => {
-    //const postObject = JSON.parse(req.body.post);
     //delete id given by front end and given by user
-   // delete postObject._id;
     delete req.body._id;
-    //delete postObject._userId;
     delete req.body._userId;
+    if (req.file) {
+       imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } else {
+        imageUrl=""
+    }
     const post = new Post({
         ...req.body,
-        //...postObject,
         //userId extracted from token by auth middleware
         userId: req.auth.userId,
-        //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        imageUrl: imageUrl
     });
     post.save()
-        .then(() => res.status(201).json({ message: 'Post enregistré !' }))
-        .catch(error => res.status(400).json({ error }));
+    .then(() => res.status(201).json({ message: 'Post enregistré !' }))
+    .catch(error => res.status(400).json({ message: 'Le post n\'a pas pu être créé' + error }));
 };
 
 // exports.getOnePost = (req, res, next) => {

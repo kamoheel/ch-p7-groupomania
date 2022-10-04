@@ -1,7 +1,7 @@
 .container {
     width: 90%;
     display: flex;
-    background-color: color-secondary;
+    background-color: $color-secondary;
     border-radius: 30px;
     margin: 5px;
     &--toggle {

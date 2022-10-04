@@ -2,6 +2,7 @@
  
 $color-primary: #FD2D01;
 $color-secondary: #FFD7D7;
+$color-secondary-light: #fcf7f7;
 $color-tertiary: #4E5166;
 
 * {
@@ -14,6 +15,7 @@ body {
   scroll-behavior: smooth;
   background-color: #fff;
   margin: 0 auto;
+  background: $color-secondary;
 }
 
 li {
@@ -31,3 +33,34 @@ a:visited {
   padding-right: 1rem;
 }
 
+form {
+  width: 80%;
+  border-radius: 30px;
+  color: $color-tertiary;
+  text-decoration: none;
+  font-size: 18px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+label {
+  margin: 5px 0;
+  text-align: left;
+}
+
+input, textarea {
+  width: 80%;
+  border-radius: 5px;
+  border: $color-tertiary solid .5px;
+}
+
+h2{
+  font-size: 30px;
+  text-align:left;
+  padding-bottom: 5px;
+  color: $color-tertiary;
+  margin-top: 10px;
+}

@@ -5,7 +5,7 @@ const { requireAuth } = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 const postCtrl = require('../controllers/post');
 
-//save sauces to database
+//save posts to database
 router.post('/', requireAuth, multer, postCtrl.createPost);
 //get list of posts
 router.get('/', requireAuth, postCtrl.getAllPosts);

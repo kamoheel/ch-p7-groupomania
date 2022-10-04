@@ -4,8 +4,8 @@ import SignupComponent from '../../components/Log/signup';
 import LoginComponent from '../../components/Log/login';
 
 const Login = () => {
-    const [signupModal, setSignupModal] = useState(true);
-    const [loginModal, setLoginModal] = useState(false);
+    const [signupModal, setSignupModal] = useState(false);
+    const [loginModal, setLoginModal] = useState(true);
 
 
     const handleModals = (e) => {

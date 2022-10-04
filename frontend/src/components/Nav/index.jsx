@@ -5,7 +5,7 @@ import Logo from '../../assets/icon-red.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = ({ localUserId, isLoggedIn }) => {
@@ -42,7 +42,7 @@ const NavBar = ({ localUserId, isLoggedIn }) => {
                     </li>
                     <li className="login">
                         <NavLink className="nav-links" end to={`/login`}>
-                            <FontAwesomeIcon icon={faArrowRightToBracket} />
+                            <FontAwesomeIcon icon={faPowerOff} className='login-icon'/>
                         </NavLink>
                     </li>
  
@@ -52,7 +52,7 @@ const NavBar = ({ localUserId, isLoggedIn }) => {
     };
 
     return (
-        <div className="container">
+        <div className="nav--container">
             <img
                 alt="logo de groupomania"
                 src={Logo}
@@ -74,7 +74,7 @@ const NavBar = ({ localUserId, isLoggedIn }) => {
                     </li>
                     <li className="signout">
                         <span className="nav-links" onClick={handleDisconnect}>
-                            <FontAwesomeIcon icon={faSignOut} />
+                            <FontAwesomeIcon icon={faPowerOff} />
                         </span>
                     </li>
                 </ul>
