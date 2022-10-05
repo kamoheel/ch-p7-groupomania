@@ -37,7 +37,7 @@ exports.getAllPosts = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
     //si req.file existe, on traite la nouvelle image, sinon on traite simplement l'objet entrant
     const postObject = req.file ? {
-        ...JSON.parse(req.body.post),
+        ...req.body.post,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
   

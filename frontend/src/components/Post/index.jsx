@@ -6,11 +6,16 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import DeletePopUp from "../DeletePopUp";
+import EditPopUp from "../EditPopUp";
 // import { useTheme } from '../../utils/hooks';
 
 const Post = ({ post, fetchAllPosts, userId, userPseudo }) => {
     const [isPostUser, setIsPostUser] = useState(false);
     const [deletePopUp, setDeletePopUp] = useState({
+        show: false,
+        id: null
+    });
+    const [editPopUp, setEditPopUp] = useState({
         show: false,
         id: null
     });
@@ -20,6 +25,28 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo }) => {
         return new Date(dateString).toLocaleDateString('fr-FR', options)
     }
     //const dateFormatted = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'long' }).format(date);
+
+    const handleEdit = (id) => {
+        setEditPopUp({
+            show: true,
+            id,
+        });
+    }
+
+    const handleEditConfirmed = () => {
+        fetchAllPosts();
+        setEditPopUp({
+            show: false,
+            id: null
+        });
+    }
+
+    const handleEditCanceled = () => {
+        setEditPopUp({
+            show: false,
+            id: null
+        });
+    };
 
     const handleDelete = (id) => {
         setDeletePopUp({
@@ -78,10 +105,17 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo }) => {
                 </p>
                 {isPostUser ? (
                     <div>
-                        {/* <button className='form--btn modify-btn' onClick={() => handleModify(post.userId)}>
+                        <button className='form--btn modify-btn' onClick={() => handleEdit(post._id)}>
                         <FontAwesomeIcon icon={faPenToSquare} className='login-icon'/>
                             Modifier
-                        </button> */}
+                        </button>
+                        {editPopUp.show && (
+                            <EditPopUp 
+                            postId={editPopUp.id}
+                            handleEditConfirmed={handleEditConfirmed}
+                            handleEditCanceled={handleEditCanceled}
+                            />
+                        )}
                         <button className='form--btn delete-btn' onClick={() => handleDelete(post._id)}>
                         <FontAwesomeIcon icon={faTrash} className='login-icon'/>
                             Supprimer
