@@ -3,15 +3,13 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const EditPopUp = ({postId, handleEditConfirmed, handleEditCanceled}) => {
-    const [newTitle, setNewTitle] = useState("");
-    const [newDescription, setNewDescription] = useState("");
+const EditPopUp = ({postId, postDescription, handleEditConfirmed, handleEditCanceled}) => {
+    const [newDescription, setNewDescription] = useState(`${postDescription}`);
     const [newImageUrl, setNewImageUrl] = useState("");
 
     function handlePostEdit(e) {
         e.preventDefault();
         const formData = new FormData()
-        newTitle && formData.append('title', newTitle)
         newDescription && formData.append('description', newDescription)
         newImageUrl && formData.append('imageUrl', newImageUrl)
 
@@ -31,25 +29,21 @@ const EditPopUp = ({postId, handleEditConfirmed, handleEditCanceled}) => {
     }
     
     return ( 
-        <div className="edit-popup">
-            <h2 className="title">Modifier le post</h2>
-            <div className='x-icon' onClick={handleEditCanceled}>
-                <FontAwesomeIcon icon={faXmark} className='login-icon'/>
+        <div className="edit--popup">
+            <div className='popup--header'>
+                <h2 className="popup--title">Modifier le post</h2>
+                <span className='popup--close' onClick={handleEditCanceled}>
+                    <FontAwesomeIcon icon={faXmark} className='x-icon'/>
+                </span>
+                
+
             </div>
-            <form onSubmit={handlePostEdit}>
-                <label htmlFor='title' className='postcreation--label'>Titre</label>
-                <input 
-                    type='text' 
-                    id='title' 
-                    //defaultValue={post.title} 
-                    onChange={(e) => setNewTitle(e.target.value)} 
-                    value={newTitle}
-                />
+            <form className='popup--form' onSubmit={handlePostEdit}>
                 <label htmlFor='description' className='postcreation--description'>Description</label>
                 <textarea 
                     type='text' 
                     id='description' 
-                    //defaultValue={post.description} 
+                    className='popup--input'
                     value={newDescription} 
                     onChange={(e) => setNewDescription(e.target.value)} 
                 />
@@ -59,10 +53,10 @@ const EditPopUp = ({postId, handleEditConfirmed, handleEditCanceled}) => {
                     id='image' 
                     accept='image/*' 
                     name="image" 
-                    //defaultValue={post.imageUrl} 
+                    className='popup-input'
                     onChange={(e) => setNewImageUrl(e.target.files[0])} 
                 />
-                <button className='form--btn' type="submit">Modifier</button>
+                <button className='form--btn' type="submit">Enregistrer</button>
             </form>
         </div>
      );

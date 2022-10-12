@@ -8,8 +8,10 @@ module.exports.requireAuth = (req, res, next) => {
         //décoder le token
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         const userId = decodedToken.userId;
+        const isAdmin = decodedToken.isAdmin;
         req.auth = {
-            userId: userId
+            userId: userId,
+            isAdmin: isAdmin
         };
         next();
       } else {

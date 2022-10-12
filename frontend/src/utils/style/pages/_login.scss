@@ -1,17 +1,24 @@
 .container {
     width: 90%;
+    height: 30rem;
     display: flex;
-    background-color: $color-secondary;
+    margin: 1rem auto;
     border-radius: 30px;
-    margin: 5px;
+    max-width: 48rem;
+    background-color: $color-secondary-light;
     &--toggle {
+        margin: 5rem 0 5rem 1rem;
         width: 20%;
+        border-radius:30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-left: 1rem;
         li {
             margin: 5px;
             list-style-type: none;
             cursor: pointer;
             padding: 15px;
-            color: #000;
             text-decoration: none;
             font-size: 18px;
             border-radius: 30px; 

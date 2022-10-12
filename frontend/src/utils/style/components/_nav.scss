@@ -80,12 +80,35 @@ nav {
       .home {
         &::before {
           content: "Accueil";
+          color: white;
           position: absolute;
-          z-index: -1;
+          z-index: 1;
           bottom: -40px;
           width: 70px;
           border-radius: 10px;
-          background-color: rgba(202, 138, 134, 0.767);
+          background-color: rgba(202, 138, 134, 0.967);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .login {
+        &::before {
+          content: "Connexion";
+          color: white;
+          position: absolute;
+          z-index: 1;
+          bottom: -40px;
+          width: 100px;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.967);
           padding: 0.3rem 0.5rem;
           box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
             rgba(0, 0, 0, 0.22) 0px 8px 12px;
@@ -101,12 +124,13 @@ nav {
       .profil {
         &::before {
           content: "Profil";
+          color: white;
           position: absolute;
-          z-index: -1;
+          z-index: 1;
           bottom: -40px;
           width: 50px;
           border-radius: 10px;
-          background-color: rgba(202, 138, 134, 0.767);
+          background-color: rgba(202, 138, 134, 0.967);
           padding: 0.3rem 0.5rem;
           box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
             rgba(0, 0, 0, 0.22) 0px 8px 12px;
@@ -122,12 +146,13 @@ nav {
       .signout {
         &::before {
           content: "Déconnexion";
+          color: white;
           position: absolute;
-          z-index: -1;
+          z-index: 1;
           bottom: -40px;
           width: 110px;
           border-radius: 10px;
-          background-color: rgba(202, 138, 134, 0.767);
+          background-color: rgba(202, 138, 134, 0.967);
           padding: 0.3rem 0.5rem;
           box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
             rgba(0, 0, 0, 0.22) 0px 8px 12px;

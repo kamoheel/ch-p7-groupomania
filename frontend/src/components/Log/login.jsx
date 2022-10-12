@@ -23,23 +23,23 @@ function LoginComponent() {
             }
         })
             .then((res) => {
-                if (res.data.errors) {
-                    emailError.innerHTML = res.data.errors.email;
-                    passwordError.innerHTML = res.data.errors.password;
-                } else {
                     localStorage.setItem("user_info", JSON.stringify(res.data));
                     window.location = '/';
-                }
-            })
+                })
             .catch((err) => {
+                if (err.response) {
+                    //emailError.innerHTML = "Identifiants Incorrects";
+                    passwordError.innerHTML = "Identifiants Incorrects";
+                } else {
                 console.log(err);
-            });
-    };
+                }
+             });
+    }
+            
 
     return (
         <div className="form-container">
             <h2 className='form-container--title'>Connexion</h2>
-            <h3 className='form-container--subtitle'>Connectez vous pour voir ce que vos collègues ont posté</h3>
             <form className='form' onSubmit={handleLogin}>
                     <label className='form--label' htmlFor='email'> E-mail : <br />
                         <input 

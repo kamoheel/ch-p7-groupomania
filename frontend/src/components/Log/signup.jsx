@@ -132,7 +132,6 @@ function SignupComponent() {
       ) : (
         <div className='form-container'>
             <h2 className='form-container--title'>S'inscrire</h2>
-            <h3 className='form-container--subtitle'>Inscrivez-vous pour voir ce que vos collègues ont posté</h3>
             <form className='form' onSubmit={handleSignup}>
                     <label className='form--label' htmlFor='pseudo'> Pseudo : <br />
                         <input 

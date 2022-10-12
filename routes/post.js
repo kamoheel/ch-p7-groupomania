@@ -16,6 +16,6 @@ router.put('/:id', requireAuth, multer, postCtrl.modifyPost);
 //Delete a post
 router.delete('/:id', requireAuth, postCtrl.deletePost);
 //Like or Dislike a post
-router.post('/:id/like', requireAuth, postCtrl.likeDislikePost);
+router.post('/:id/like', requireAuth, postCtrl.likePost);
 
 module.exports = router;

@@ -5,7 +5,10 @@ const { isEmail } = require('validator')
 const userSchema = mongoose.Schema({
     pseudo: { type: String, required: true, unique: true},
     email: { type: String, required: true, validate: [isEmail], unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    isAdmin: { type: Boolean, default: false},
+    imageUrl: { type: String, default: "" },
+    businessUnit: { type: String },
 });
 
 userSchema.plugin(uniqueValidator);

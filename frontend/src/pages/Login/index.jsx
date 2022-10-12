@@ -21,12 +21,12 @@ const Login = () => {
     return (
         <div className='container'>
 
-                <div className='container--toggle'>
-                <ul>
+                <ul className='container--toggle'>
+                
                     <li id="register" onClick={handleModals} className={signupModal ? 'active-btn' : null}>S'inscrire</li>
                     <li id="login" onClick={handleModals} className={loginModal ? 'active-btn' : null}>Se Connecter</li>
                 </ul>
-                </div> 
+                
                 <div className='container--component'>
                 {signupModal && <SignupComponent />}
                 {loginModal && <LoginComponent />}

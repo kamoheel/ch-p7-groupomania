@@ -1,18 +1,24 @@
 import { useNavigate, NavLink } from "react-router-dom";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import Post from "../../components/Post";
 import CreatePost from "../../components/CreatePost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Home= () => {
     const [allPosts, setAllPosts] = useState([]);
     const [userId, setUserId] = useState("");
     const [userPseudo, setUserPseudo] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const createRef = useRef(null);
 
     const navigate = useNavigate();
+
+    //scroll to create a post
+    const executeScroll = () => createRef.current.scrollIntoView();
 
     //useCallback to not re-render if the dependancy does not change
     const fetchAllPosts = useCallback(
@@ -49,7 +55,8 @@ const Home= () => {
           setUserPseudo(
             JSON.parse(localStorage.getItem("user_info")).userPseudo
           );
-          setIsLoggedIn(true)
+          setIsLoggedIn(true);
+
       
         //   if (admin === 1) {
         //     setIsAdmin(true);
@@ -58,15 +65,31 @@ const Home= () => {
           fetchAllPosts();
     }, [fetchAllPosts, navigate]);
 
+    useEffect(() => {
+      axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_API_URL}api/auth/${userId}`,
+          withCredentials: true,
+          })
+          .then((res) => {
+              res.data.isAdmin ? setIsAdmin(true) : setIsAdmin(false);
+          })
+          .catch((err) => {
+              console.log(`Echec de récupération info administrateur : ${err}`);
+          });
+  }, [isAdmin, userId])
+
     return (
         <div>
             <h1 className='main-title'>Groupomania, le réseau social de votre entreprise</h1>
             <h2 className='main-subtitle'>Bienvenue {userPseudo}, retrouvez ce que vos collègues ont posté</h2>
+            {isAdmin && <h3>Vous êtes administrateur !</h3>}
             {isLoggedIn ? (
               <div>
-                <div className='posts-container'>
+                <div className='posts-container' id="post-container">
+                    <button className="create--btn" onClick={executeScroll}><FontAwesomeIcon icon={faPlus} className='login-icon'/></button>
                     {allPosts.map((post, pos) => {
-                        allPosts.sort((a, b) => b.timestamps < a.timestamps );
+                        allPosts.sort((a, b) => a.timestamps < b.timestamps );
                         return (
                         <div className="key-posts" key={pos}>
                             <Post
@@ -74,6 +97,7 @@ const Home= () => {
                             fetchAllPosts={fetchAllPosts}
                             userId={userId}
                             userPseudo={userPseudo}
+                            isAdmin={isAdmin}
                             // isAdmin={isAdmin}
                             />
                         </div>
@@ -82,6 +106,7 @@ const Home= () => {
                 }
                 </div>
                 <CreatePost 
+                refProp={createRef}
                 fetchAllPosts={fetchAllPosts}
                 userId={userId}
                 userPseudo={userPseudo}
