@@ -5,6 +5,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import defaultProfilePicture from "../../assets/profile.png";
 
 const Profile = () => {
     const { id } = useParams();
@@ -56,7 +57,7 @@ const Profile = () => {
                 res.data.businessUnit && setBusinessUnit(res.data.businessUnit);
             })
             .catch((err) => {
-                console.log(`Echec de récupération info administrateur : ${err}`);
+                console.log(`Echec de récupération info de profil : ${err}`);
             });
         setProfileChanged(false);
         }
@@ -66,7 +67,7 @@ const Profile = () => {
         <div className="profile--container">
             <button className="form--btn profile--edit" onClick={() => handleEditToggle()}><FontAwesomeIcon icon={faEdit} className='profile--edit__icon'/></button>
             <h2 className="profile--caption"> Profil Groupomania </h2>
-            <img key={userPseudo + "profile-picture"} src={profilePicture ? profilePicture : "./src/assets/profile.png"} alt={"Photo de profil de " + userPseudo } className="profile--image" />
+            <img key={userPseudo + "profile-picture"} src={profilePicture ? profilePicture : defaultProfilePicture} alt={"Photo de profil de " + userPseudo } className="profile--image" onClick={() => handleEditToggle()}/>
             <div className="profile--data">
                 <h3 className="bold profile--name">{userPseudo}</h3>  
                 <p className="bold"> {businessUnit}</p>

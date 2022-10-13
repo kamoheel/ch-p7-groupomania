@@ -11,7 +11,7 @@ import { faComment } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import DeletePopUp from "../DeletePopUp";
 import EditPopUp from "../EditPopUp";
-// import { useTheme } from '../../utils/hooks';
+import defaultProfilePicture from "../../assets/profile.png";
 
 const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
     const [isPostUser, setIsPostUser] = useState(false);
@@ -26,6 +26,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
         description: null
     });
     const [isLiked, setIsLiked] = useState(false);
+    const [authorPicture, setAuthorPicture] = useState(defaultProfilePicture);
     const dateString = post.timestamps;
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric", hour: 'numeric' }
@@ -70,7 +71,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
             show: true,
             id,
         });
-
+        setShowEditMenu(false);
     }
     
     const handleDeleteConfirmed = () => {
@@ -90,7 +91,6 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                     show: false,
                     id: null
                 });
-                setShowEditMenu(false);
             })
             .catch((err) => {
                 console.log(`Echec suppression de post : ${err}`);
@@ -103,7 +103,6 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
             show: false,
             id: null
         });
-        setShowEditMenu(false);
     };
 
     const handleLike = (postId) => {
@@ -126,6 +125,20 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
     }
 
     useEffect(() => {
+        axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_API_URL}api/auth/${post.userId}`,
+          withCredentials: true,
+          })
+          .then((res) => {
+              res.data.imageUrl && setAuthorPicture(res.data.imageUrl);
+          })
+          .catch((err) => {
+              console.log(`Echec de récupération photo de l'auteur : ${err}`);
+          });
+      }, [post.userId]);
+
+    useEffect(() => {
         if (post.userId === userId) {
             setIsPostUser(true);
         } else {
@@ -142,17 +155,20 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
         }
     }, [post.usersLiked, userId])
 
-            return (
+                return (
             <div className='post--container'>
 
-                {/* <div className='profile-picture--container'>
-                    <img className='profile-picture' src={imageUrl} alt="photo de profil" />
-                </div> */}
-                <p className='post--header'>
+                <div className='profile--picture__container'>
+                    
+                </div>
+                <div className='post--header'>
+                <img className='profile--picture' src={authorPicture} alt={`Avatar de ${post.userPseudo}`} />
+                <div className='post--header__right'>
                     <span className='post--author'>{post.userPseudo}</span> 
                     <br />
                     <span className='post--date'>{formatDate(dateString)}</span>
-                </p>
+                </div>
+                </div>
                 {/* <h3 className='post--title'> {post.title} </h3> */}
                 <p className='post--description'>{post.description}</p>
                 {post.imageUrl ? (

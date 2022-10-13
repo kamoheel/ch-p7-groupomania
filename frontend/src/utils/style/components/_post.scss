@@ -17,10 +17,19 @@
         
         box-shadow: 2px 2px 10px #e2e3e9;
     }
+    .profile--picture {
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: .8rem;
+    }
 }
 
 .post--header {
     align-self: start;
+    display: flex;
+    align-items: center;
     .post--author{
         font-weight: bold;
     }
@@ -106,56 +115,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    z-index: 2;
+    width: 90%;
+    height: 90%;
+    z-index: 3;
     background-color: $color-secondary;
     opacity: .95;
     border-radius: 20px;
-    .popup--header {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        .popup--title{
-            margin: 2rem auto;
-            color: black;
-        }
-        .popup--close{
-            background-color: $color-primary;
-            padding: .5rem .8rem;
-            border-radius: 50%;
-            margin-right: 2rem;
-           cursor: pointer;
-           color: white;
-           &::before {
-            content: "Annuler la modification";
-            font-size: 18px;
-            color: white;
-            position: absolute;
-            z-index: 1;
-            right: 2rem;
-            width: 150px;
-            border-radius: 10px;
-            background-color: $color-primary;
-            padding: 0.3rem 0.5rem;
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-              rgba(0, 0, 0, 0.22) 0px 8px 12px;
-            opacity: 0;
-            transition: 0.2s ease;
-            transform: translateX(0);
-          }
-          &:hover::before {
-            transform: translateX(-20%);
-            opacity: 1;
-          }
-           &:hover{
-            background-color: $color-secondary-light;
-            color: $color-primary;
-           }
-        }
-    }
     .popup--form {
-        margin: 10px auto;
+        margin: auto;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -167,7 +134,52 @@
     }
 }
 
-.popup-box {
+.popup--header {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    .popup--title{
+        margin: 2rem auto;
+        color: black;
+    }
+}
+.popup--close{
+    background-color: $color-primary;
+    padding: .5rem .8rem;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+   cursor: pointer;
+   color: white;
+   &::before {
+    content: "Annuler";
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    z-index: 1;
+    right: 2rem;
+    width: 70px;
+    border-radius: 10px;
+    background-color: $color-primary;
+    padding: 0.3rem 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 8px 12px;
+    opacity: 0;
+    transition: 0.2s ease;
+    transform: translateX(0);
+  }
+  &:hover::before {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+   &:hover{
+    background-color: $color-secondary-light;
+    color: $color-primary;
+   }
+}
+
+.popup--box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -179,27 +191,27 @@
     opacity: .95;
     display: flex;
     border-radius: 20px;
-    .popup-message {
-        width: 50%;
-        height: 50%;
+    .popup--message {
+        width: 70%;
+        height: 70%;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         margin: auto;
         align-items: center;
         background-color: white;
         border-radius: 20px;
     }
-    .popup-alert {
+    .popup--alert {
         font-size: 20px;
         color: $color-primary;
         margin: auto;
     }
-    .popup-choice {
+    .popup--choice {
         display: flex;
         justify-content: space-between;
-        margin: 0 auto auto auto;
-        .popup-btn {
+        margin: auto;
+        .popup--btn {
             background-color: $color-primary;
             color: white;
             margin: 0 1rem;

@@ -53,7 +53,7 @@ const EditPopUp = ({postId, postDescription, handleEditConfirmed, handleEditCanc
                     id='image' 
                     accept='image/*' 
                     name="image" 
-                    className='popup-input'
+                    className='popup--input'
                     onChange={(e) => setNewImageUrl(e.target.files[0])} 
                 />
                 <button className='form--btn' type="submit">Enregistrer</button>

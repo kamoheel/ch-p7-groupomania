@@ -24,6 +24,31 @@
         position: absolute;
         top: -1.5rem;
         right: 8rem;
+        &::before {
+            content: "Modifier le profil";
+            font-size: 18px;
+            color: white;
+            position: absolute;
+            z-index: 1;
+            right: 2rem;
+            width: 150px;
+            border-radius: 10px;
+            background-color: $color-primary;
+            padding: 0.3rem 0.5rem;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+              rgba(0, 0, 0, 0.22) 0px 8px 12px;
+            opacity: 0;
+            transition: 0.2s ease;
+            transform: translateX(0);
+          }
+          &:hover::before {
+            transform: translateX(-20%);
+            opacity: 1;
+          }
+           &:hover{
+            background-color: $color-secondary-light;
+            color: $color-primary;
+           }
     }
     .profile--data {
         margin: auto;
@@ -45,6 +70,10 @@
         height: 200px;
         border-radius: 50%;
         margin: auto;
+        cursor: pointer;
+        &:hover {
+            opacity:.8;
+        }
     }
 }
 
