@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import DefaultPicture from '../../assets/profile.png';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as farThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { faComment } from "@fortawesome/free-regular-svg-icons";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { faComment as farComment } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import DeletePopUp from "../DeletePopUp";
 import EditPopUp from "../EditPopUp";
+import Comments from "../Comments";
 import defaultProfilePicture from "../../assets/profile.png";
 
 const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
@@ -26,10 +27,14 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
         description: null
     });
     const [isLiked, setIsLiked] = useState(false);
+    const [allComments, setAllComments] = useState([]);
     const [authorPicture, setAuthorPicture] = useState(defaultProfilePicture);
+    const [commentsToggle, setCommentsToggle] = useState(false);
+    const [commentsCount, setCommentsCount] = useState(0);
+    const [hasCommented, setHasCommented] = useState(false);
     const dateString = post.timestamps;
     const formatDate = (dateString) => {
-        const options = { year: "numeric", month: "long", day: "numeric", hour: 'numeric' }
+        const options = { year: "numeric", month: "long", day: "numeric", hour: 'numeric', minute: 'numeric' }
         return new Date(dateString).toLocaleDateString('fr-FR', options)
     }
     //const dateFormatted = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'long' }).format(date);
@@ -124,19 +129,57 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
             });
     }
 
-    useEffect(() => {
+   
+
+     const fetchAuthor = (authorId) => {
         axios({
-          method: "GET",
-          url: `${process.env.REACT_APP_API_URL}api/auth/${post.userId}`,
-          withCredentials: true,
-          })
-          .then((res) => {
-              res.data.imageUrl && setAuthorPicture(res.data.imageUrl);
-          })
-          .catch((err) => {
-              console.log(`Echec de récupération photo de l'auteur : ${err}`);
-          });
-      }, [post.userId]);
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}api/auth/${authorId}`,
+            withCredentials: true,
+            })
+            .then((res) => {
+                res.data.imageUrl && setAuthorPicture(res.data.imageUrl);
+            })
+            .catch((err) => {
+                console.log(`Echec de récupération photo de l'auteur : ${err}`);
+            });  
+     }
+
+     const fetchAllComments = useCallback ( 
+        () => {
+            axios({
+                method: "GET",
+                url: `${process.env.REACT_APP_API_URL}api/comments/${post._id}`,
+                withCredentials: true,
+                // data: {
+                //     postId: postId,
+                // }
+                })
+                .then((res) => {
+                   if (res.data)  {
+                        setAllComments(res.data);
+                        // fetchAuthor(res.data.commenterId);
+                        setCommentsCount(allComments.length);
+                        function findUserId(comment){
+                            return comment.commenterId === userId;
+                        }
+                        if (res.data.find(findUserId)) {
+                            setHasCommented(true);
+                        }
+                    };
+                    // setCommentsToggle(true);
+
+                })
+                .catch((err) => {
+                    console.log(`Echec de récupération des commentaires : ${err}`);
+                });
+            }, [post._id, allComments.length, userId]);
+
+    useEffect(() => {
+        //get the post author Picture
+        fetchAuthor(post.userId);
+        fetchAllComments();
+      }, [post.userId, fetchAllComments]);
 
     useEffect(() => {
         if (post.userId === userId) {
@@ -154,6 +197,16 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
             setIsLiked(false);
         }
     }, [post.usersLiked, userId])
+
+
+    const handleShowComments = (postId) => {
+        if (!commentsToggle) {
+            setCommentsToggle(true);
+        }
+        else {
+            setCommentsToggle(false);
+        }
+     }
 
                 return (
             <div className='post--container'>
@@ -183,10 +236,27 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                         )}
                         <div className='post--like__counter'>{post.likes}</div>
                     </div>
-                    <div className='post--footer__icon'>
-                    <FontAwesomeIcon icon={faComment} className='footer--icon comment-icon' />
+                    <div className='post--footer__icon' onClick={() => handleShowComments(post._id)}>
+                        {!hasCommented ? (
+                            <FontAwesomeIcon icon={farComment} className='footer--icon empty-comment-icon' />
+                        ) : (
+                            <FontAwesomeIcon icon={faComment} className='footer--icon full-comment-icon' />  
+                        )}
+                    
+                    <div className='post--comment__counter'>{commentsCount}</div>
                     </div>
                 </div>
+                    {commentsToggle && 
+                        <Comments
+                            postId={post._id}
+                            userId={userId}
+                            fetchAuthor={fetchAuthor}
+                            isAdmin={isAdmin}
+                            commentsToggle={commentsToggle}
+                            fetchAllComments={fetchAllComments}
+                            allComments={allComments}
+                        />
+                    }
 
                 {(isPostUser || isAdmin) ? (
                     <div className='post-edit-dropdown'>
@@ -235,7 +305,7 @@ Post.propTypes = {
 Post.defaultProps = {
     title: '',
     description: '',
-    imageUrl: DefaultPicture,
+    imageUrl: defaultProfilePicture,
 }
 
 export default Post

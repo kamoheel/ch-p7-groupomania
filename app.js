@@ -11,6 +11,7 @@ require('./config/db');
 //Routes files
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const commentRoutes = require('./routes/comment');
 
 //Uses the default Helmet options and adds the `crossOriginResourcePolicy` middleware that allows images
 app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
@@ -34,7 +35,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 //posts routes
 app.use('/api/posts', postRoutes);
-
+//user profile routes
+app.use('/api/comments', commentRoutes);
 
 
 module.exports = app;

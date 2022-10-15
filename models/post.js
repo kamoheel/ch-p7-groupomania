@@ -11,15 +11,15 @@ const postSchema = mongoose.Schema({
    // dislikes: { type: Number, default: 0 },
     usersLiked: { type: [String] },
     //usersDisliked: { type: [String] },
-    comments: {
-        type: [
-            {
-                commenterId: String,
-                text: String,
-                timestamp: Number
-            }
-        ],
-    },
+    // comments: {
+    //     type: [
+    //         {
+    //             commenterId: String,
+    //             text: String,
+    //             timestamp: Date
+    //         }
+    //     ],
+    // },
 });
 
 module.exports = mongoose.model('post', postSchema);

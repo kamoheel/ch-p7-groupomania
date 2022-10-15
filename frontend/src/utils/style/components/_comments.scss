@@ -1,0 +1,87 @@
+.comments-section {
+    margin-top: 1rem;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    border-top: $color-tertiary solid 1px;
+    .comment--create--btn {
+        cursor: pointer;
+    }
+}
+
+.key--comments{
+    border: $color-secondary solid 2px;
+    border-radius: 20px;
+    margin: .5rem;
+    position: relative;
+}
+
+.post--comments {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+
+    min-width: 40%;
+    min-height: 6rem;
+    .comment--header {
+        padding: 1rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        .comment--profile--picture {
+            object-fit: cover;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: .6rem;
+        }
+        .comment--author {
+            font-size: 14px;
+        }
+    }
+    .comment--text {
+        padding: 1rem;
+        margin: auto;
+    }
+
+}
+
+.comment-edit-dropdown{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    .menu-icon{
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        &:hover {
+            cursor: pointer;
+            background-color: $color-secondary;
+            border-radius: 50%;
+        }
+    }
+    .list-item {
+        cursor: pointer;
+        .fa-icon {
+            margin-right: 5px;
+        }
+        &:hover {
+            color: white;
+            background-color: $color-primary;
+        }
+    }
+    .dropdown-list {
+        padding: 50px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $color-secondary;
+        border-radius: 20px;
+    }
+}
