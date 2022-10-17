@@ -26,12 +26,18 @@ flex-direction: column;
     &--btn {
         padding: 15px;
         margin: auto;
-        width: 40%;
+        width: auto;
         text-decoration: none;
         font-size: 18px;
-        color: white; 
+        font-weight: bold;
+        color: $color-primary; 
         border-radius: 30px; 
-        background-color: $color-primary;
+        background-color: white;
+        border: $color-tertiary solid 3px;
+        cursor:pointer;
+        &:hover {
+          background-color: $color-secondary;
+        }
     }
 }
 

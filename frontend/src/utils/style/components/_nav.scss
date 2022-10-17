@@ -1,15 +1,21 @@
 .nav--container {
-  background-color: $color-tertiary;
+  background-color: $color-tertiary-dark;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.logo--container {
+  width: 40%;
+  margin: auto;
+}
+
 .logo-small{
     padding-top: 10px;
     object-fit: cover;
-    height: 50px;
+    width: 100%;
+    height: auto;
 }
 
 nav {
@@ -27,7 +33,7 @@ nav {
       justify-content: space-around;
   
       li {
-        width: 15%;
+        width: 20%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -54,8 +60,18 @@ nav {
           .login-icon {
             color: $color-secondary;
           }
+          .nav-icon {
+            margin: auto;
+          }
+          .nav--text {
+            font-size: 20px;
+            margin: auto;
+          }
           @media screen and (max-width:768px) {
             font-size: 1.4em;
+            .nav--text {
+              display: none;
+            }
           }
           &::after {
             content: "";

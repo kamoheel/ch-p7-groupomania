@@ -23,8 +23,8 @@ const Login = () => {
 
                 <ul className='container--toggle'>
                 
-                    <li id="register" onClick={handleModals} className={signupModal ? 'active-btn' : null}>S'inscrire</li>
-                    <li id="login" onClick={handleModals} className={loginModal ? 'active-btn' : null}>Se Connecter</li>
+                    <li id="register" onClick={handleModals} className={signupModal ? 'active-btn' : null}>Inscription</li>
+                    <li id="login" onClick={handleModals} className={loginModal ? 'active-btn' : null}>Connexion</li>
                 </ul>
                 
                 <div className='container--component'>

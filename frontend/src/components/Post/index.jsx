@@ -138,7 +138,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
             withCredentials: true,
             })
             .then((res) => {
-                res.data.imageUrl && setAuthorPicture(res.data.imageUrl);
+                res.data.imageUrl ? setAuthorPicture(res.data.imageUrl) : setAuthorPicture(defaultProfilePicture);
             })
             .catch((err) => {
                 console.log(`Echec de récupération photo de l'auteur : ${err}`);
@@ -156,7 +156,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                 // }
                 })
                 .then((res) => {
-                   if (res.data)  {
+                   if (res.data.length > 0)  {
                         setAllComments(res.data);
                         // fetchAuthor(res.data.commenterId);
                         setCommentsCount(allComments.length);
@@ -225,7 +225,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                 {/* <h3 className='post--title'> {post.title} </h3> */}
                 <p className='post--description'>{post.description}</p>
                 {post.imageUrl ? (
-                <img className='post--image' src={post.imageUrl} alt={post.title} />
+                <div className="post--image__container"><img className='post--image' src={post.imageUrl} alt={post.title} width="640" height="360"/></div>
                 ) : null }
                 <div className='post--footer'>
                     <div className='post--footer__icon post--like' onClick={() => handleLike(post._id)}>

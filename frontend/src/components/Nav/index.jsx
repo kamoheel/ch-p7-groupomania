@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = ({ localUserId, isLoggedIn }) => {
 
@@ -37,12 +36,14 @@ const NavBar = ({ localUserId, isLoggedIn }) => {
                 <ul>
                     <li className="home">
                         <NavLink className="nav-links" end to="/">
-                            <FontAwesomeIcon icon={faHome} />
+                            <FontAwesomeIcon icon={faHome} className='nav-icon'/> 
+                            <div className="nav--text">Accueil</div>
                         </NavLink>
                     </li>
                     <li className="login">
                         <NavLink className="nav-links" end to={`/login`}>
-                            <FontAwesomeIcon icon={faPowerOff} className='login-icon'/>
+                            <FontAwesomeIcon icon={faPowerOff} className='login-icon nav-icon'/>
+                            <div className="nav--text">Connexion</div>
                         </NavLink>
                     </li>
  
@@ -53,28 +54,35 @@ const NavBar = ({ localUserId, isLoggedIn }) => {
 
     return (
         <div className="nav--container">
-            <img
-                alt="logo de groupomania"
-                src={Logo}
-                onClick={backHome}
-                className="logo-small"
-            />
+            <div className="logo--container">
+                <img
+                    alt="logo de groupomania"
+                    src={Logo}
+                    onClick={backHome}
+                    className="logo-small"
+                    width="1400"
+                    height="270"
+                />
+            </div>
             {isLoggedIn ? (
                 <nav>
                 <ul>
                     <li className="home">
                         <NavLink className="nav-links" end to="/">
-                            <FontAwesomeIcon icon={faHome} />
+                            <FontAwesomeIcon icon={faHome} className='nav-icon'/>
+                            <div className="nav--text">Accueil</div>
                         </NavLink>
                     </li>
                     <li className="profil">
                         <NavLink className="nav-links" end to={`/profile/${localUserId}`}>
-                            <FontAwesomeIcon icon={faUser} />
+                            <FontAwesomeIcon icon={faUser} className='nav-icon'/>
+                            <div className="nav--text">Profil</div>
                         </NavLink>
                     </li>
                     <li className="signout">
                         <span className="nav-links" onClick={handleDisconnect}>
-                            <FontAwesomeIcon icon={faPowerOff} />
+                            <FontAwesomeIcon icon={faPowerOff} className='nav-icon'/>
+                            <div className="nav--text">Déconnexion</div>
                         </span>
                     </li>
                 </ul>

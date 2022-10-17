@@ -8,8 +8,10 @@
     border: $color-secondary solid 1px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 30px;
+    min-height: 20rem;
     max-width: 48rem;
-    transition: 200ms;
+    height: auto;
+    //transition: 200ms;
     margin: 10px auto;
     position: relative;
     z-index: 1;
@@ -51,10 +53,16 @@
   align-items: center;
 }
 
+.post--image__container{
+    width: 90%;
+    height: auto;
+    margin: 1rem auto;
+}
 .post--image {
     object-fit: cover;
-    max-width: 100%;
-    max-height: 25rem;
+    width: 100%;
+    height: auto;
+    // max-height: 25rem;
     margin: 0 auto;
     border-radius: 20px;
 }
@@ -121,6 +129,9 @@
     background-color: $color-secondary;
     opacity: .95;
     border-radius: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     .popup--form {
         margin: auto;
         display: flex;
@@ -128,7 +139,7 @@
         align-items: flex-start;
         justify-content: space-between;
         .popup--input {
-            margin-bottom: 2rem;
+            margin-bottom: .8rem;
             width: 100%;
         }
     }
@@ -139,9 +150,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: auto;
+    margin: auto auto 0 auto;
     .popup--title{
-        margin: 2rem auto;
+        margin: auto;
         color: black;
     }
 }

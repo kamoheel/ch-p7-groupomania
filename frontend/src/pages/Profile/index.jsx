@@ -65,7 +65,7 @@ const Profile = () => {
 
     return (
         <div className="profile--container">
-            <button className="form--btn profile--edit" onClick={() => handleEditToggle()}><FontAwesomeIcon icon={faEdit} className='profile--edit__icon'/></button>
+            <button className="form--btn profile--edit" onClick={() => handleEditToggle()} aria-label="Modifier le profil"><FontAwesomeIcon icon={faEdit} className='profile--edit__icon'/></button>
             <h2 className="profile--caption"> Profil Groupomania </h2>
             <img key={userPseudo + "profile-picture"} src={profilePicture ? profilePicture : defaultProfilePicture} alt={"Photo de profil de " + userPseudo } className="profile--image" onClick={() => handleEditToggle()}/>
             <div className="profile--data">

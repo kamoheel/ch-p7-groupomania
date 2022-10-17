@@ -54,47 +54,48 @@ const Home= () => {
           setIsLoggedIn(false);
           navigate("/login");
           return;
-          }
+          } else {
           const storageUserId = JSON.parse(localStorage.getItem("user_info")).userId;
-          //const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
           setUserPseudo(
             JSON.parse(localStorage.getItem("user_info")).userPseudo
           );
           setIsLoggedIn(true);
-
-      
-        //   if (admin === 1) {
-        //     setIsAdmin(true);
-        //   }
           setUserId(storageUserId);
           fetchAllPosts();
-    }, [fetchAllPosts, navigate]);
-
-    useEffect(() => {
-      axios({
-          method: "GET",
-          url: `${process.env.REACT_APP_API_URL}api/auth/${userId}`,
-          withCredentials: true,
-          })
-          .then((res) => {
-              res.data.isAdmin ? setIsAdmin(true) : setIsAdmin(false);
-              console.log("Info admin récupérée");
-          })
-          .catch((err) => {
-              console.log(`Echec de récupération info administrateur : ${err}`);
-          });
-  }, [isAdmin, userId])
+          if (userId) {
+          axios({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}api/auth/${userId}`,
+            withCredentials: true,
+            })
+            .then((res) => {
+                res.data.isAdmin ? setIsAdmin(true) : setIsAdmin(false);
+            })
+            .catch((err) => {
+                console.log(`Echec de récupération info administrateur : ${err}`);
+            });
+          }
+          }
+    }, [fetchAllPosts, navigate, isAdmin, userId]);
 
     return (
         <div className="home--container">
-            <h1 className='main--title'>Groupomania, le réseau social de votre entreprise</h1>
+            {/* <h1 className='main--title'>Groupomania, le réseau social de votre entreprise</h1> */}
             {isAdmin ? <h2>Vous êtes administrateur !</h2> : <h2 className='main--subtitle'>Bienvenue <span className="bold">{userPseudo}</span>, retrouvez ce que vos collègues ont publié</h2>}
             {isLoggedIn ? (
               <div>
                 <div className='posts--container' id="post-container">
-                    <button className="create--btn" onClick={executeScroll}><FontAwesomeIcon icon={faPlus} className='create-icon'/></button>
+                    <button className="create--btn" onClick={executeScroll} aria-label="Nouvelle publication"><FontAwesomeIcon icon={faPlus} className='create-icon'/></button>
                     {allPosts.map((post, pos) => {
-                        allPosts.sort((a, b) => a.timestamps < b.timestamps );
+                        allPosts.sort(function(a, b) {
+                          if (a.timestamps < b.timestamps) {
+                            return 1;
+                          }
+                          if (a.timestamps > b.timestamps) {
+                            return -1;
+                          }
+                          return 0;
+                        });
                         return (
                         <div className="key-posts" key={pos}>
                             <Post
@@ -107,6 +108,7 @@ const Home= () => {
                         </div>
                         );
                     })
+
                 }
                 </div>
                 <CreatePost 
@@ -115,7 +117,7 @@ const Home= () => {
                 userId={userId}
                 userPseudo={userPseudo}
                 />
-                <button className="scroll--btn" onClick={handleScrollToTop}><FontAwesomeIcon icon={faArrowUp} className='scroll-icon'/></button>
+                <button className="scroll--btn" onClick={handleScrollToTop} aria-label="Haut-de-page"><FontAwesomeIcon icon={faArrowUp} className='scroll-icon'/></button>
               </div>
 
         ) : (

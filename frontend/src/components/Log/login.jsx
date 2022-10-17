@@ -10,7 +10,6 @@ function LoginComponent() {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         
         axios({
@@ -69,7 +68,9 @@ function LoginComponent() {
                     </label>
                     <div className='password error'></div>
                     <br />
-                    <button className='form--btn' type="submit">Se connecter</button>
+                    <button className='form--btn' type="submit">
+                        Se connecter
+                    </button>
             </form>
         </div>
     )

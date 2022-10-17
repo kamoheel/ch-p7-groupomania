@@ -1,11 +1,15 @@
 .container {
     width: 90%;
-    height: 30rem;
+    height: auto;
     display: flex;
     margin: 1rem auto;
     border-radius: 30px;
     max-width: 48rem;
     background-color: $color-secondary-light;
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+      }
     &--toggle {
         margin: 5rem 0 5rem 1rem;
         width: 20%;
@@ -14,8 +18,15 @@
         flex-direction: column;
         justify-content: space-around;
         margin-left: 1rem;
+        @media screen and (max-width: 768px) {
+            margin: auto;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+          }
         li {
-            margin: 5px;
+            margin: auto;
             list-style-type: none;
             cursor: pointer;
             padding: 15px;
@@ -27,11 +38,13 @@
     &--component {
         width: 80%;
         padding: 40px;
+        margin: auto;
     }
 }
 
 .active-btn {
-    color: #fff; 
+    color: $color-secondary; 
+    font-weight: bold;
     border-radius: 30px; 
-    background-color: #FD2D01;
+    background-color: $color-tertiary;
 }
