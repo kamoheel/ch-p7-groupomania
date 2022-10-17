@@ -33,6 +33,10 @@ Le backend a été crée avec **Node.js**, **Express.js** et **MongoDB** comme b
 #### Frontend
 Le frontend a été crée avec **React.js**
 
+##### Configuration
+
+- Créer un fichier **.env** : 
+  - REACT_APP_API_URL=http://localhost:5000/
 ##### Installation
 - Se situer dans le dossier **/frontend**
 - Démarrer **npm install** pour installer toutes les dépendances du frontend.
