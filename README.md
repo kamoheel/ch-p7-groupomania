@@ -17,7 +17,7 @@
 Le backend a été crée avec **Node.js**, **Express.js** et **MongoDB** comme base de données.
 
 ##### Configuration
-- Se situer dans le sous-dossier **config**
+- Dans le sous-dossier **config** 
 - Ajouter vos informations de cluster dans le fichier **db.js**
 - Créer un fichier **.env** : 
   - PORT=5000
@@ -25,7 +25,7 @@ Le backend a été crée avec **Node.js**, **Express.js** et **MongoDB** comme b
   - DB_PASSWORD=`votre mot de passe MongoDB`
 
 ##### Installation
-- Dans le terminal de VSCODE, se situer dans le dossier **/backend**.
+- Dans le terminal de VSCODE, se situer dans le dossier **/backend**. `cd backend`
 - Démarrer **npm install** pour installer toutes les dependencies du backend.
 - Lancer le serveur avec **npm start** 
 

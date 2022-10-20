@@ -8,7 +8,7 @@ frontend/.env
 
 backend/node_modules
 backend/config/.env
-backend/images
+# backend/images should be added to .gitignore but for better experience this time, images will be sent
 
 # testing
 frontend/coverage
