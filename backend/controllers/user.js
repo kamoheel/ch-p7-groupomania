@@ -40,7 +40,7 @@ exports.login = (req, res, next) => {
                         'RANDOM_TOKEN_SECRET',
                         { expiresIn: '24h' }
                     )
-                    res.cookie("jwt", createdToken, { httpOnly: true, maxAge});
+                    res.cookie("jwt", createdToken, { httpOnly: true, maxAge });
                     res.status(200).json({
                         userPseudo: user.pseudo,
                         userId: user._id,

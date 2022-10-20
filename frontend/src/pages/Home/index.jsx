@@ -50,6 +50,19 @@ const Home= () => {
     );
 
     useEffect(() => {
+      //expiration du localStorage après 24h
+      const hours = 24;
+      const now = new Date().getTime();
+      const setupTime = localStorage.getItem('setupTime');
+      if (setupTime == null) {
+        localStorage.setItem('setupTime', now)
+      } else {
+        if(now-setupTime > hours*60*60*1000) {
+          localStorage.clear();
+          localStorage.setItem('setupTime', now);
+        }
+      }
+
         if (!localStorage.getItem("user_info")) {
           setIsLoggedIn(false);
           navigate("/login");

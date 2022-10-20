@@ -7,6 +7,10 @@
     .comment--create--btn {
         cursor: pointer;
     }
+    @media screen and (max-width:768px) {
+        width: 90%;
+        margin: auto;
+    }
 }
 
 .key--comments{
@@ -83,5 +87,17 @@
         align-items: center;
         background-color: $color-secondary;
         border-radius: 20px;
+    }
+}
+
+.comment--creation {
+    .popup--form {
+        padding-bottom: 0;
+        .popup--label{
+            margin-top: 1rem;
+        }
+        .popup--input {
+            margin-bottom: 1rem;
+        }
     }
 }

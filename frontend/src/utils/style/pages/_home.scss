@@ -1,14 +1,15 @@
 .home--container {
-  width: 90%;
+  width: 55%;
   margin: auto;
 }
 
 h1 {
+  width: 55%;
   font-size: 20px;
   text-align: right;
   padding-top: 2rem;
   color: $color-tertiary;
-  margin-right: 2rem;
+  margin: auto;
 }
 
 h2 {
@@ -49,6 +50,9 @@ Link {
   background-color: $color-primary;
   margin-left: 7rem;
   cursor: pointer;
+  @media screen and (max-width:768px) {
+    right: 3rem;
+  }
   &::before {
     content: "Créer un post";
     font-size: 18px;
@@ -90,6 +94,10 @@ Link {
   background-color: $color-primary;
   margin-left: 7rem;
   cursor: pointer;
+  @media screen and (max-width:768px) {
+    right: 2rem;
+    bottom: 1rem;
+  }
   &::before {
     content: "Haut-de-page";
     font-size: 18px;

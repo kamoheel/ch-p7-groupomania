@@ -7,6 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
+
 const NavBar = ({ localUserId, isLoggedIn }) => {
 
     const navigate = useNavigate();

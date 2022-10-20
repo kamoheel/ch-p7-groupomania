@@ -1,13 +1,13 @@
 .nav--container {
   background-color: $color-tertiary-dark;
-  border-radius: 20px;
+  //border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .logo--container {
-  width: 40%;
+  width: 30%;
   margin: auto;
 }
 
@@ -33,7 +33,7 @@ nav {
       justify-content: space-around;
   
       li {
-        width: 20%;
+        width: auto;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,6 +43,7 @@ nav {
           }
         }
         .nav-links {
+          padding: 0 1rem;
           cursor: pointer;
           display: flex;
           justify-content: center;
@@ -62,6 +63,10 @@ nav {
           }
           .nav-icon {
             margin: auto;
+            padding: 0 1rem;
+            @media screen and (max-width:768px) {
+              font-size: 1.2rem;
+            }
           }
           .nav--text {
             font-size: 20px;

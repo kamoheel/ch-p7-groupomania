@@ -25,11 +25,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     res.setHeader("Access-Control-Allow-Credentials", "true");
+    //res.setHeader('Cache-Control', 'public, max-age=31536000' ) //mise en cache pour 1 an 60secs*60min*24heures*365jours
     next();
   });
 
+
   //routing handler : indique notre app.js comment traiter les requêtes vers la route /images en randant le dossier images statique
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images'), { maxAge: 31536000}));
 
 //authentification routes
 app.use('/api/auth', userRoutes);

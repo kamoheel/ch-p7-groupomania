@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import './utils/style/index.scss';
 
 function App() {
+
     return ( 
         <BrowserRouter>
           <Header />
