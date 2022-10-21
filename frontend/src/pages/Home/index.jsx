@@ -41,9 +41,6 @@ const Home= () => {
           })
           .catch((err) => {
             console.log(err);
-            // alert("Il y a une erreur, veuillez vous reconnecter")
-            // navigate("/login");
-            // localStorage.clear();
           }
           );
       }, [userId],
@@ -99,7 +96,7 @@ const Home= () => {
               <div>
                 <div className='posts--container' id="post-container">
                     <button className="create--btn" onClick={executeScroll} aria-label="Nouvelle publication"><FontAwesomeIcon icon={faPlus} className='create-icon'/></button>
-                    {allPosts.map((post, pos) => {
+                    {allPosts.map((post) => {
                         allPosts.sort(function(a, b) {
                           if (a.timestamps < b.timestamps) {
                             return 1;
@@ -110,7 +107,7 @@ const Home= () => {
                           return 0;
                         });
                         return (
-                        <div className="key-posts" key={pos}>
+                        <div className="key-posts" key={post.id}>
                             <Post
                             post={post}
                             fetchAllPosts={fetchAllPosts}

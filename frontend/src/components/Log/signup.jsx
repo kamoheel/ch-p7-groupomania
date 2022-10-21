@@ -52,7 +52,6 @@ function SignupComponent({ handleSignUpSuccess }) {
 
       const handlePasswordInput = (e) => {
         setPassword(e.target.value);
-    
         if (regexLetter.test(e.target.value)) {
           setIsLetterOk(true);
         } else {

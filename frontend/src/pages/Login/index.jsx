@@ -28,25 +28,21 @@ const Login = () => {
 
     return (
         <div className='container'>
-
                 <ul className='container--toggle'>
                     <li id="login" onClick={handleModals} className={loginModal ? 'active-btn' : null}>Connexion</li>
                     <li id="register" onClick={handleModals} className={signupModal ? 'active-btn' : null}>Inscription</li>
-
                 </ul>
-                
                 <div className='container--component'>
-                {signupModal && <SignupComponent handleSignUpSuccess={handleSignUpSuccess}/>}
-                {loginModal && (
-                <div>
-                    <LoginComponent />
-                    {signupSuccess && <h4 className="success">
-                    Inscription réussie, veuillez vous connecter
-                    </h4>}
-                </div>
-                )}
-                </div>
-            
+                    {signupModal && <SignupComponent handleSignUpSuccess={handleSignUpSuccess}/>}
+                    {loginModal && (
+                    <div>
+                        <LoginComponent />
+                        {signupSuccess && <h4 className="success">
+                        Inscription réussie, veuillez vous connecter
+                        </h4>}
+                    </div>
+                    )}
+                </div> 
         </div>
     )
 }

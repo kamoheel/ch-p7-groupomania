@@ -210,23 +210,18 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
 
                 return (
             <div className='post--container'>
-
-                <div className='profile--picture__container'>
-                    
-                </div>
                 <div className='post--header'>
-                <img className='profile--picture' src={authorPicture} alt={`Avatar de ${post.userPseudo}`} />
-                <div className='post--header__right'>
-                    <span className='post--author'>{post.userPseudo}</span> 
-                    <br />
-                    <span className='post--date'>{formatDate(dateString)}</span>
+                    <img className='profile--picture' src={authorPicture} alt={`Avatar de ${post.userPseudo}`} />
+                    <div className='post--header__right'>
+                        <span className='post--author'>{post.userPseudo}</span> 
+                        <br />
+                        <span className='post--date'>{formatDate(dateString)}</span>
+                    </div>
                 </div>
-                </div>
-                {/* <h3 className='post--title'> {post.title} </h3> */}
                 <p className='post--description'>{post.description}</p>
-                {post.imageUrl ? (
+                {post.imageUrl && (
                 <div className="post--image__container"><img className='post--image' src={post.imageUrl} alt={post.title} width="640" height="360"/></div>
-                ) : null }
+                )}
                 <div className='post--footer'>
                     <div className='post--footer__icon post--like' onClick={() => handleLike(post._id)}>
                         {!isLiked ? (
@@ -258,7 +253,7 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                         />
                     }
 
-                {(isPostUser || isAdmin) ? (
+                {(isPostUser || isAdmin) && (
                     <div className='post-edit-dropdown'>
                         <FontAwesomeIcon icon={faEllipsisVertical} className='menu-icon' onClick={handleShowEditMenu}/>
                         {showEditMenu && (
@@ -267,16 +262,14 @@ const Post = ({ post, fetchAllPosts, userId, userPseudo, isAdmin }) => {
                                 <FontAwesomeIcon icon={faPenToSquare} className='fa-icon'/>
                                      Modifier
                                 </li>
-                                
                                 <li key='delete' className='list-item list-delete' onClick={() => handleDelete(post._id)}>
                                 <FontAwesomeIcon icon={faTrash} className='fa-icon'/>
                                      Supprimer
                                 </li>
-
                             </ul>
                         )} 
                     </div>
-                ) : null }
+                )}
 
                 {editPopUp.show && (
                     <EditPopUp 
