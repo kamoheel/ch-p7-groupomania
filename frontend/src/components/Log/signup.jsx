@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import LogInForm from "./login";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-//import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 
-function SignupComponent() {
+function SignupComponent({ handleSignUpSuccess }) {
     const [errors, setErrors] = useState({});
     const [pseudo, setPseudo] = useState('');
     const [terms, setTerms] = useState(false);
@@ -16,8 +15,8 @@ function SignupComponent() {
     const [isLetterOk, setIsLetterOk] = useState(false);
     const [isNumberOk, setIsNumberOk] = useState(false);
     const [isSpecialOk, setIsSpecialOk] = useState(false);
-    const [formSubmit, setFormSubmit] = useState(false);
     const [isMinMaxOk, setIsMinMaxOk] = useState(false);
+    const navigate = useNavigate();
 
     const regexEmail =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -76,6 +75,7 @@ function SignupComponent() {
         }
       };
 
+
     const handleSignup = (e) => {
         e.preventDefault();
 
@@ -88,8 +88,6 @@ function SignupComponent() {
             setErrors({ ...errors, terms: "" });
           }
 
-       // const emailError = document.querySelector('.email.error');
-        //const passwordError = document.querySelector('.password.error');
         if (
             !regexPassword.test(password) ||
             !terms ||
@@ -111,7 +109,8 @@ function SignupComponent() {
             })
                 .then((res) => {
                     if (!res.data.errors) {
-                        setFormSubmit(true);
+                        navigate("/login");
+                        handleSignUpSuccess();
                     }
                 })
                 .catch((err) => {
@@ -122,14 +121,6 @@ function SignupComponent() {
 
     return (
       <div>
-      { formSubmit ? (
-        <div>
-          <LogInForm />
-          <h4 className="success">
-            Inscription réussie, veuillez vous connecter
-          </h4>
-        </div>
-      ) : (
         <div className='form-container'>
             <h2 className='form-container--title'>S'inscrire</h2>
             <form className='form' onSubmit={handleSignup}>
@@ -212,7 +203,7 @@ function SignupComponent() {
                 <button className='form--btn' type="submit">S'inscrire</button>
             </form>
         </div>
-      )}
+      {/* )} */}
       </div>
     )
 }

@@ -49,9 +49,10 @@ const Comment = ({ comment, isAdmin, currentUserId, postId, fetchAllComments }) 
             }
             })
             .then((res) => {
-                fetchAllComments();
+
                 console.log('Le post a bien été supprimé');
                 setShowEditMenu(false);
+                fetchAllComments();
             })
             .catch((err) => {
                 console.log(`Echec suppression de post : ${err}`);

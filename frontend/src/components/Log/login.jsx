@@ -27,7 +27,6 @@ function LoginComponent() {
                 })
             .catch((err) => {
                 if (err.response) {
-                    //emailError.innerHTML = "Identifiants Incorrects";
                     passwordError.innerHTML = "Identifiants Incorrects";
                 } else {
                 console.log(err);

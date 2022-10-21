@@ -14,9 +14,16 @@ const Profile = () => {
     const [businessUnit, setBusinessUnit] = useState("");
     const [editToggle, setEditToggle] = useState(false);
     const [profileChanged, setProfileChanged] = useState(true);
-    
+    const [errorTextContent, setErrorTextContent] = useState(false);
+
+    const textRegex = /^[A-Za-z0-9-_]+$/;
+
+   
     const handleProfileEdit = (e) => {
         e.preventDefault();
+        if (!textRegex.test(businessUnit)) {
+            setErrorTextContent(true);
+        } else {
         const profileData = new FormData()
         profileData.append('businessUnit', businessUnit)
         profileData.append('imageUrl', profilePicture)
@@ -34,6 +41,7 @@ const Profile = () => {
         .catch((err) => {
             console.log(`Echec de modification du profil : ${err}`);
         });
+    }
     }
 
     const handleEditToggle = () => {
@@ -88,8 +96,9 @@ const Profile = () => {
                         id='business-unit' 
                         className='profile--input'
                         value={businessUnit} 
-                        onChange={(e) => setBusinessUnit(e.target.value)} 
+                        onChange={(e) => {setBusinessUnit(e.target.value); setErrorTextContent(false)}} 
                     />
+                    {errorTextContent && <div className="alert">Caractères spéciaux non autorisés</div>}
                     <label htmlFor='image' className='profile--label'>Image</label>
                     <input 
                         type='file' 

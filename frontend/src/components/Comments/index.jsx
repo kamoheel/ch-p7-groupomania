@@ -6,12 +6,13 @@ import Comment from "../Comment";
 import { useEffect } from "react";
 
 const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter, fetchAllComments, allComments}) => {
-
-
     const [creationToggle, setCreationToggle] = useState(false);
     const [commentContent, setCommentContent] = useState("");
     const [newCommentEmpty, setNewCommentEmpty] = useState(false);
+    const [errorCommentContent, setErrorCommentContent] = useState(false);
     const currentUserId = userId;
+
+    const textareaRegex = /^[A-Za-z0-9-_!,.;?]+$/;
 
     const handleCommentToggle = () => {
         !creationToggle ? setCreationToggle(true) : setCreationToggle(false);
@@ -19,6 +20,10 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
 
     const handleCommentCreation = (e) => {
         e.preventDefault();
+        if (!textareaRegex.test(commentContent)) {
+            setErrorCommentContent(true);
+        } else {
+
         if (commentContent) {
             axios({
                 method: "POST",
@@ -41,6 +46,7 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
             setNewCommentEmpty(true);
         }
     }
+    }
 
         useEffect( () => {
             fetchAllComments();
@@ -60,8 +66,9 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
                     id='text' 
                     className='popup--input'
                     value={commentContent} 
-                    onChange={(e) => setCommentContent(e.target.value)} 
+                    onChange={(e) => {setCommentContent(e.target.value); setErrorCommentContent(false)}} 
                 />
+                {errorCommentContent && <div className="alert">Veuillez ne pas utiliser de caractères spéciaux</div>}
                 <button className='form--btn' type="submit">Enregistrer</button>
                 {newCommentEmpty && <div className="alert">Veuillez remplir le champs ci-dessus.</div>}
                 </form>
