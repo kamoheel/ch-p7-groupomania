@@ -96,7 +96,7 @@ const Home= () => {
               <div>
                 <div className='posts--container' id="post-container">
                     <button className="create--btn" onClick={executeScroll} aria-label="Nouvelle publication"><FontAwesomeIcon icon={faPlus} className='create-icon'/></button>
-                    {allPosts.map((post, pos) => {
+                    {allPosts.map((post) => {
                         allPosts.sort(function(a, b) {
                           if (a.timestamps < b.timestamps) {
                             return 1;
@@ -107,15 +107,14 @@ const Home= () => {
                           return 0;
                         });
                         return (
-                        <div className="key-posts" key={pos}>
                             <Post
                             post={post}
                             fetchAllPosts={fetchAllPosts}
                             userId={userId}
                             userPseudo={userPseudo}
                             isAdmin={isAdmin}
+                            key={post._id}
                             />
-                        </div>
                         );
                     })
 
