@@ -12,7 +12,7 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
     const [errorCommentContent, setErrorCommentContent] = useState(false);
     const currentUserId = userId;
 
-    const textareaRegex = /^[A-Za-z0-9-_!,.;?]+$/;
+    // const textareaRegex = /^[A-Za-z0-9-_!,.;?]+$/;
 
     const handleCommentToggle = () => {
         !creationToggle ? setCreationToggle(true) : setCreationToggle(false);
@@ -20,9 +20,9 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
 
     const handleCommentCreation = (e) => {
         e.preventDefault();
-        if (!textareaRegex.test(commentContent)) {
-            setErrorCommentContent(true);
-        } else {
+        // if (!textareaRegex.test(commentContent)) {
+        //     setErrorCommentContent(true);
+        // } else {
 
         if (commentContent) {
             axios({
@@ -45,7 +45,7 @@ const Comments = ({ postId, userId, isAdmin, commentsToggle, pullCommentsCounter
         } else {
             setNewCommentEmpty(true);
         }
-    }
+    // }
     }
 
         useEffect( () => {

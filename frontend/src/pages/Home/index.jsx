@@ -117,8 +117,7 @@ const Home= () => {
                             />
                         );
                     })
-
-                }
+                    }
                 </div>
                 <CreatePost 
                 refProp={createRef}

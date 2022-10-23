@@ -14,16 +14,15 @@ const Profile = () => {
     const [businessUnit, setBusinessUnit] = useState("");
     const [editToggle, setEditToggle] = useState(false);
     const [profileChanged, setProfileChanged] = useState(true);
-    const [errorTextContent, setErrorTextContent] = useState(false);
+    // const [errorTextContent, setErrorTextContent] = useState(false);
 
-    const textRegex = /^[A-Za-z0-9-_]+$/;
+    // const textRegex = /^[A-Za-z0-9-_]+$/;
 
-   
     const handleProfileEdit = (e) => {
         e.preventDefault();
-        if (!textRegex.test(businessUnit)) {
-            setErrorTextContent(true);
-        } else {
+        // if (!textRegex.test(businessUnit)) {
+        //     setErrorTextContent(true);
+        // } else {
         const profileData = new FormData()
         profileData.append('businessUnit', businessUnit)
         profileData.append('imageUrl', profilePicture)
@@ -36,12 +35,11 @@ const Profile = () => {
         .then((res) => {
             setEditToggle(false);
             setProfileChanged(true);
-            console.log('L\'utilisateur a bien été modifié')
         })
         .catch((err) => {
             console.log(`Echec de modification du profil : ${err}`);
         });
-    }
+    // }
     }
 
     const handleEditToggle = () => {
@@ -96,9 +94,9 @@ const Profile = () => {
                         id='business-unit' 
                         className='profile--input'
                         value={businessUnit} 
-                        onChange={(e) => {setBusinessUnit(e.target.value); setErrorTextContent(false)}} 
+                        onChange={(e) => setBusinessUnit(e.target.value)} 
                     />
-                    {errorTextContent && <div className="alert">Caractères spéciaux non autorisés</div>}
+                    {/* {errorTextContent && <div className="alert">Caractères spéciaux non autorisés</div>} */}
                     <label htmlFor='image' className='profile--label'>Image</label>
                     <input 
                         type='file' 
