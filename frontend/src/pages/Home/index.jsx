@@ -125,6 +125,7 @@ const Home= () => {
                 fetchAllPosts={fetchAllPosts}
                 userId={userId}
                 userPseudo={userPseudo}
+                handleScrollToTop={handleScrollToTop}
                 />
                 <button className="scroll--btn" onClick={handleScrollToTop} aria-label="Haut-de-page"><FontAwesomeIcon icon={faArrowUp} className='scroll-icon'/></button>
               </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 
-const CreatePost = ({userId, fetchAllPosts, userPseudo, refProp}) => {
+const CreatePost = ({userId, fetchAllPosts, userPseudo, refProp, handleScrollToTop}) => {
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [emptyField, setEmptyField] = useState(false)
@@ -33,6 +33,7 @@ const CreatePost = ({userId, fetchAllPosts, userPseudo, refProp}) => {
                     setDescription("");
                     setImageUrl("");
                     fetchAllPosts();
+                    handleScrollToTop();
                 })
                 .catch((err) => {
                 console.log(err);
